@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export const Welcome = () => {
+export default function Welcome() {
     return (
         <SafeAreaView>
             <Text>Welcome</Text>
