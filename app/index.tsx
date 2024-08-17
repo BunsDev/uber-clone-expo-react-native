@@ -5,9 +5,9 @@ export default function App() {
     return (
         <SafeAreaView>
             <View className="h-full flex justify-center items-center w-full">
-            <Text className="text-center text-blue-500 font-bold text-3xl">Welcome to Ryde</Text>
+                <Text className="text-center text-blue-500 font-bold text-3xl">Welcome to Ryde</Text>
             </View>
         </SafeAreaView>
-        
+
     )
 }
