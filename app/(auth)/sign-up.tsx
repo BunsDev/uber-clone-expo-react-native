@@ -3,9 +3,10 @@ import { InputField } from "@/components/input-field";
 import { OAuth } from "@/components/oauth";
 import { icons, images } from "@/constants";
 import { useSignUp } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { View, Text, ScrollView, Image, Alert } from "react-native";
+import { ReactNativeModal } from "react-native-modal";
 
 
 export default function SignUp() {
@@ -18,7 +19,7 @@ export default function SignUp() {
         password: "",
     });
     const [verification, setVerification] = useState({
-        state: "default",
+        state: "success",
         error: "",
         code: "",
     });
@@ -36,8 +37,6 @@ export default function SignUp() {
                 state: "pending",
             });
         } catch (err: any) {
-            // See https://clerk.com/docs/custom-flows/error-handling
-            // for more info on error handling
             console.log(JSON.stringify(err, null, 2));
             Alert.alert("Error", err.errors[0].longMessage);
         }
@@ -129,6 +128,62 @@ export default function SignUp() {
                         <Text className="font-bold text-neutral-950">Login</Text>
                     </Link>
                 </View>
+                <ReactNativeModal
+                    isVisible={verification.state === "pending"}
+                    onModalHide={() => {
+                        if (verification.state === "success") setShowSuccessModal(true);
+                    }}
+                >
+                    <View className="bg-white px-7 py-9 rounded-md flex min-h-[300px] w-full">
+                        <Text className="text-3xl font-JakartaBold mb-2">
+                            Verification
+                        </Text>
+                        <Text className="text-base text-neutral-500 font-Jakarta mb-5">
+                            We've sent a verification code to your {form.email}.
+                        </Text>
+                        <InputField
+                            label="Code"
+                            icon={icons.lock}
+                            value={verification.code}
+                            placeholder="Enter code"
+                            keyboardType="numeric"
+                            inputStyle="w-full"
+                            onChangeText={(text) => setVerification({ ...verification, code: text })}
+                        />
+                        {verification.error && (
+                            <Text className="text-red-500 text-center">
+                                {verification.error}
+                            </Text>
+                        )}
+                        <CustomButton
+                            title="Verify Email"
+                            className="mt-5"
+                            onPress={onPressVerify}
+
+                        />
+                    </View>
+                </ReactNativeModal>
+
+                <ReactNativeModal isVisible={showSuccessModal}>
+                    <View className="bg-white px-7 py-9 rounded-md items-center min-h-[300px]">
+                        <Image
+                            source={images.check}
+                            className="w-[110px] h-[110px] mx-auto my-5"
+                        />
+                        <Text className="text-3xl font-JakartaBold text-center">
+                            Verified
+                        </Text>
+                        <Text className="text-base text-neutral-500 font-Jakarta mt-2 text-center">
+                            You have successfully verified your account.
+                        </Text>
+
+                        <CustomButton
+                            title="Browse Home"
+                            className="mt-5"
+                            onPress={() => router.replace("/(root)/(tabs)/home")}
+                        />
+                    </View>
+                </ReactNativeModal>
             </View>
         </ScrollView>
     )
