@@ -1,8 +1,9 @@
 import { router } from "expo-router";
 import { useRef, useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
+import { onboarding } from '../../constants/index';
 
 export default function Welcome() {
     const ref = useRef<Swiper>(null);
@@ -14,7 +15,7 @@ export default function Welcome() {
                 onPress={() => router.replace("/(auth)/sign-up")}
                 className="w-full flex justify-end items-end p-5"
             >
-                <Text className="text-blue-500 text-md font-JakartaBold">
+                <Text className="text-neutral-800 text-md font-JakartaBold">
                     Skip
                 </Text>
             </Pressable>
@@ -25,13 +26,26 @@ export default function Welcome() {
                 activeDot={<View className="w-[32px] h-[4px] mx-1 bg-neutral-800" />}
                 onIndexChanged={(index) => setActiveIndex(index)}
             >
-                [
-                    {
-                        title: "Welcome",
-                        image: "../assets/images/welcome.png",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    }
-                ]
+                {onboarding.map((item) => (
+                    <View key={item.id} className="flex items-center justify-center p-5">
+                        <Image
+                            src={item.image}
+                            resizeMode="contain"
+                            alt="Onboarding Images"
+                            className="w-full h-[300px] object-cover"
+                        />
+                        <View 
+                            className="flex flex-row items-center justify-center w-full mt-10"
+                        >
+                            <Text className="text-neutral-950 text-3xl font-bold mx-10 text-center">
+                                {item.title}
+                            </Text>
+                        </View>
+                        <Text className="text-lg font-JakartaSemiBold text-neutral-500 mx-10 mt-3 text-center">
+                                {item.description}
+                            </Text>
+                    </View>
+                ))}
             </Swiper>
         </SafeAreaView>
     )
