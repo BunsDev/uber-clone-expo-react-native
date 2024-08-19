@@ -1,5 +1,6 @@
 import { CustomButton } from "@/components/custom-button";
 import { InputField } from "@/components/input-field";
+import { OAuth } from "@/components/oauth";
 import { icons, images } from "@/constants";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -57,6 +58,8 @@ export default function SignUp() {
                         onPress={onSignUpPress}
                         className="mt-6"
                     />
+
+                    <OAuth />
 
                     <Link 
                         href="/sign-in"
