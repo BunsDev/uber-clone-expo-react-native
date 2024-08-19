@@ -1,25 +1,18 @@
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo'
-import { Link } from 'expo-router'
-import { Text, View } from 'react-native'
+import { RideCard } from '@/components/ride-card'
+import { rides } from '@/constants'
+import { useUser } from '@clerk/clerk-expo'
+import { FlatList, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Home() {
   const { user } = useUser()
 
   return (
-    <SafeAreaView>
-      <SignedIn>
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-        
-      </SignedIn>
-      <SignedOut>
-        <Link href="/sign-in">
-          <Text>Sign In</Text>
-        </Link>
-        <Link href="/sign-up">
-          <Text>Sign Up</Text>
-        </Link>
-      </SignedOut>
+    <SafeAreaView className="bg-general-500">
+      <FlatList 
+        data={rides.slice(0, 5)}
+        renderItem={({ item }) => <RideCard rides={item}}
+      />
     </SafeAreaView>
   )
 }
