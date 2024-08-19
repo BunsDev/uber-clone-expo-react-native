@@ -180,7 +180,10 @@ export default function SignUp() {
                         <CustomButton
                             title="Browse Home"
                             className="mt-5"
-                            onPress={() => router.replace("/(root)/(tabs)/home")}
+                            onPress={() => {
+                                setShowSuccessModal(false);
+                                router.push("/(root)/(tabs)/home")
+                            }}
                         />
                     </View>
                 </ReactNativeModal>

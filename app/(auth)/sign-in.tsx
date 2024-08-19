@@ -2,21 +2,43 @@ import { CustomButton } from "@/components/custom-button";
 import { InputField } from "@/components/input-field";
 import { OAuth } from "@/components/oauth";
 import { icons, images } from "@/constants";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { useSignIn } from "@clerk/clerk-expo";
+import { Link, router } from "expo-router";
+import { useCallback, useState } from "react";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 
 
 export default function SignIn() {
+    const { signIn, setActive, isLoaded } = useSignIn();
+
     const [form, setForm] = useState({
-        name: "",
         email: "",
-        password: ""
+        password: "",
     });
 
-    const onSignInPress = async () => {
+    const onSignInPress = useCallback(async () => {
+        if (!isLoaded) return;
 
-    }
+        try {
+            const signInAttempt = await signIn.create({
+                identifier: form.email,
+                password: form.password,
+            });
+
+            if (signInAttempt.status === "complete") {
+                await setActive({ session: signInAttempt.createdSessionId });
+                router.replace("/(root)/(tabs)/home");
+            } else {
+                // See https://clerk.com/docs/custom-flows/error-handling for more info on error handling
+                console.log(JSON.stringify(signInAttempt, null, 2));
+                Alert.alert("Error", "Log in failed. Please try again.");
+            }
+        } catch (err: any) {
+            console.log(JSON.stringify(err, null, 2));
+            Alert.alert("Error", err.errors[0].longMessage);
+        }
+    }, [isLoaded, form]);
+
 
     return (
         <ScrollView className="flex-1 bg-white">
