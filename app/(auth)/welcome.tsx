@@ -4,14 +4,16 @@ import { View, Text, Pressable, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 import { onboarding } from '../../constants/index';
+import { CustomButton } from "@/components/custom-button";
 
 export default function Welcome() {
     const ref = useRef<Swiper>(null);
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(0);
+    const isLastSlide = activeIndex === onboarding.length - 1;
 
     return (
         <SafeAreaView className="flex h-full items-center justify-between bg-neutral-50">
-            <Pressable 
+            <Pressable
                 onPress={() => router.replace("/(auth)/sign-up")}
                 className="w-full flex justify-end items-end p-5"
             >
@@ -34,7 +36,7 @@ export default function Welcome() {
                             alt="Onboarding Images"
                             className="w-full h-[300px] object-cover"
                         />
-                        <View 
+                        <View
                             className="flex flex-row items-center justify-center w-full mt-10"
                         >
                             <Text className="text-neutral-950 text-3xl font-bold mx-10 text-center">
@@ -42,11 +44,17 @@ export default function Welcome() {
                             </Text>
                         </View>
                         <Text className="text-lg font-JakartaSemiBold text-neutral-500 mx-10 mt-3 text-center">
-                                {item.description}
-                            </Text>
+                            {item.description}
+                        </Text>
                     </View>
                 ))}
             </Swiper>
+
+            <CustomButton
+                onPress={() => isLastSlide ? router.replace("/(auth)/sign-up") : ref.current?.scrollBy(1)}
+                className="w-11/12 mt-10"
+                title={isLastSlide ? "Get Started" : "Next"}
+            />
         </SafeAreaView>
     )
 }
