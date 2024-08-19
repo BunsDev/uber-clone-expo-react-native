@@ -9,7 +9,6 @@ export const InputField = ({
     labelStyle,
     inputStyle,
     containerStyle,
-    placeholder,
     secureTextEntry = false,
     ...props
 } : InputFieldProps) => {
@@ -32,7 +31,8 @@ export const InputField = ({
                             />
                         )}
                         <TextInput 
-                            placeholder={placeholder}
+                            {...props}
+                            secureTextEntry={secureTextEntry}
                             className={`rounded-md p-4 font-JakartaSemiBold text-base flex-1 text-left ${inputStyle}`}
                         />
                     </View>

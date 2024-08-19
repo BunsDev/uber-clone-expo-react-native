@@ -1,5 +1,7 @@
+import { CustomButton } from "@/components/custom-button";
 import { InputField } from "@/components/input-field";
 import { icons, images } from "@/constants";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 
@@ -10,6 +12,10 @@ export default function SignUp() {
         email: "",
         password: ""
     });
+
+    const onSignUpPress = async () => {
+
+    }
 
     return (
         <ScrollView className="flex-1 bg-white">
@@ -30,6 +36,35 @@ export default function SignUp() {
                         placeholder="Enter your name"
                         onChangeText={(text) => setForm({...form, name: text})}
                     />
+                    <InputField 
+                        label="Email"
+                        icon={icons.email}
+                        value={form.email}
+                        placeholder="Enter your email"
+                        onChangeText={(text) => setForm({...form, email: text})}
+                    />
+                    <InputField 
+                        label="Password"
+                        icon={icons.lock}
+                        value={form.password}
+                        secureTextEntry={true}
+                        placeholder="**********"
+                        onChangeText={(text) => setForm({...form, password: text})}
+                    />
+
+                    <CustomButton
+                        title="Sign Up"
+                        onPress={onSignUpPress}
+                        className="mt-6"
+                    />
+
+                    <Link 
+                        href="/sign-in"
+                        className="text-lg text-center text-neutral-500 mt-10"
+                    >
+                        <Text>Already have an account?</Text>{" "}
+                        <Text className="font-bold text-neutral-950">Login</Text>
+                    </Link>
                 </View>
             </View>
         </ScrollView>
