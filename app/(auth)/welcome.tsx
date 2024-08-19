@@ -31,7 +31,7 @@ export default function Welcome() {
                 {onboarding.map((item) => (
                     <View key={item.id} className="flex items-center justify-center p-5">
                         <Image
-                            src={item.image}
+                            source={item.image}
                             resizeMode="contain"
                             alt="Onboarding Images"
                             className="w-full h-[300px] object-cover"
