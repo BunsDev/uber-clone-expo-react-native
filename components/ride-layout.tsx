@@ -2,7 +2,7 @@ import { icons } from "@/constants";
 import { router } from "expo-router";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native"
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Map } from "./Map";
+import { Map } from "./map";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"
 import { useRef } from "react";
 

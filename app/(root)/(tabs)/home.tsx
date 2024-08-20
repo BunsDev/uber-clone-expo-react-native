@@ -1,5 +1,5 @@
 import { GoogleTextInput } from '@/components/google-text-input'
-import { Map } from '@/components/Map'
+import { Map } from '@/components/map'
 import { RideCard } from '@/components/ride-card'
 import { icons, images, rides } from '@/constants'
 import { useLocationStore } from '@/store'
