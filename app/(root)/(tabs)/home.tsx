@@ -2,13 +2,41 @@ import { GoogleTextInput } from '@/components/google-text-input'
 import { Map } from '@/components/Map'
 import { RideCard } from '@/components/ride-card'
 import { icons, images, rides } from '@/constants'
+import { useLocationStore } from '@/store'
 import { useUser } from '@clerk/clerk-expo'
+import { useEffect, useState } from 'react'
 import { FlatList, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
+import * as Location from "expo-location"
 export default function Home() {
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
+  const [hasPermissions, setHasPermissions] = useState(false);
   const { user } = useUser();
   const loading = true;
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        setHasPermissions(false);
+        return;
+      };
+
+      let location = await Location.getCurrentPositionAsync();
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        address: `${address[0].name}, ${address[0].region}`, 
+      })
+    })();
+  }, [])
 
   const handleSignout = () => {
 
