@@ -7,7 +7,10 @@ import { useUser } from '@clerk/clerk-expo'
 import { useEffect, useState } from 'react'
 import { FlatList, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import * as Location from "expo-location"
+import * as Location from "expo-location";
+import { router } from 'expo-router'
+
+
 export default function Home() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
@@ -42,8 +45,17 @@ export default function Home() {
 
   }
 
-  const handleDestinationPress = () => {
+  const handleDestinationPress = (
+    location : {
+      address: string,
+      latitude: number, 
+      longitude: number, 
+    }
+    
+  ) => {
+    setDestinationLocation(location);
 
+    router.push("/(root)/find-ride");
   }
 
   return (
