@@ -1,3 +1,5 @@
+import { GoogleTextInput } from '@/components/google-text-input'
+import { Map } from '@/components/Map'
 import { RideCard } from '@/components/ride-card'
 import { icons, images, rides } from '@/constants'
 import { useUser } from '@clerk/clerk-expo'
@@ -8,7 +10,11 @@ export default function Home() {
   const { user } = useUser();
   const loading = true;
 
-  const handleSignout= () => {
+  const handleSignout = () => {
+
+  }
+
+  const handleDestinationPress = () => {
 
   }
 
@@ -50,12 +56,30 @@ export default function Home() {
                 onPress={handleSignout}
                 className="justify-center items-center w-10 h-10 rounded-md bg-neutral-50"
               >
-                  <Image 
-                    source={icons.out} 
-                    className="w-4 h-4" 
-                  />
+                <Image
+                  source={icons.out}
+                  className="w-4 h-4"
+                />
               </Pressable>
             </View>
+
+            <GoogleTextInput
+              icon={icons.search}
+              handlePress={handleDestinationPress}
+              containerStyle="bg-neutral-50 shadow-md shadow-neutral-300"
+            />
+            <>
+              <Text className="text-lg font-JakartaBold mt-5 mb-3">
+                Your Current Location
+              </Text>
+              <View className="flex flex-row items-center bg-transparent w-[300px]">
+                <Map />
+              </View>
+            </>
+
+            <Text className="text-lg font-JakartaBold mt-5 mb-3">
+              Recent Rides
+            </Text>
           </>
         )}
       />
