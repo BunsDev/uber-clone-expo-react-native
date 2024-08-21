@@ -4,6 +4,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
 import { tokenCache } from '@/lib/auth';
+import { LogBox } from "react-native";
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
 
@@ -13,10 +17,7 @@ if (!publishableKey) {
   )
 }
 
-
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+LogBox.ignoreLogs(["Clerk:"]);
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -40,7 +41,7 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider 
+    <ClerkProvider
       tokenCache={tokenCache}
       publishableKey={publishableKey}
     >
