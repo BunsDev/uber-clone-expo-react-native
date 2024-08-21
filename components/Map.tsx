@@ -1,11 +1,14 @@
-import { drivers, icons } from "@/constants";
-import { calculateRegion, generateMarkersFromData } from "@/lib/map";
+import { icons } from "@/constants";
+import { useFetch } from "@/lib/fetch";
+import { calculateDriverTimes, calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { useDriverStore, useLocationStore } from "@/store";
-import { MarkerData } from "@/types/type";
+import { Driver, MarkerData } from "@/types/type";
 import { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 
 export const Map = () => {
+    const { data: drivers, loading, error } = useFetch<Driver[]>(`/(api)/driver`);
     const {
         userLatitude,
         userLongitude,
@@ -16,7 +19,6 @@ export const Map = () => {
     const [markers, setMarkers] = useState<MarkerData[]>([]);
 
     useEffect(() => {
-        setDrivers(drivers);
         if (Array.isArray(drivers)) {
             if (!userLatitude || !userLongitude) return;
             const newMarkers = generateMarkersFromData({
@@ -27,7 +29,37 @@ export const Map = () => {
 
             setMarkers(newMarkers);
         }
-    }, [drivers])
+    }, [drivers]);
+
+    useEffect(() => {
+        if (markers.length > 0 && destinationLatitude && destinationLongitude) { 
+            calculateDriverTimes({
+                markers,
+                userLongitude,
+                userLatitude,
+                destinationLongitude,
+                destinationLatitude
+            }).then((drivers) => {
+                setDrivers(drivers as MarkerData[])
+            })
+        }
+    }, [markers, destinationLatitude, destinationLongitude, userLatitude, userLongitude])
+
+    if (loading || (!userLatitude || !userLongitude)) {
+        return (
+            <View className="flex justify-center items-center w-full h-full">
+                <ActivityIndicator size="large" color="black" />
+            </View>
+        )
+    }
+
+    if (error) {
+        return (
+            <View className="flex justify-center items-center w-full h-full">
+                <Text className="font-medium text-lg">Error: {error}</Text>
+            </View>
+        )
+    }
 
     const region = calculateRegion({
         userLatitude,
