@@ -141,7 +141,7 @@ export const Payment = ({
                         Booking placed successfully
                     </Text>
 
-                    <Text className="text-md text-general-200 font-JakartaRegular text-center mt-3">
+                    <Text className="text-md text-neutral-500 font-JakartaRegular text-center mt-3">
                         Thank you for your booking. Your reservation has been successfully
                         placed. Please proceed with your trip.
                     </Text>

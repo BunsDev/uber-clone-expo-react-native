@@ -3,19 +3,21 @@ import { Map } from '@/components/map'
 import { RideCard } from '@/components/ride-card'
 import { icons, images, rides } from '@/constants'
 import { useLocationStore } from '@/store'
-import { useUser } from '@clerk/clerk-expo'
+import { useAuth, useUser } from '@clerk/clerk-expo'
 import { useEffect, useState } from 'react'
 import { FlatList, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Location from "expo-location";
 import { router } from 'expo-router'
+import { useFetch } from '@/lib/fetch'
 
 
 export default function Home() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
   const { user } = useUser();
-  const loading = true;
+  const { signOut } = useAuth();
+  const { data: recentRides, loading } = useFetch(`/(api)/rides/${user?.id}`);
 
   useEffect(() => {
     (async () => {
@@ -42,7 +44,8 @@ export default function Home() {
   }, [])
 
   const handleSignout = () => {
-
+    signOut();
+    router.replace("/(auth)/sign-in");
   }
 
   const handleDestinationPress = (

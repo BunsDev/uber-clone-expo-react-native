@@ -105,7 +105,7 @@ export const Map = () => {
                         title="Destination"
                         image={icons.pin}
                     />
-                    < MapViewDirections
+                    <MapViewDirections
                         origin={{
                             latitude: userLatitude,
                             longitude: userLongitude
