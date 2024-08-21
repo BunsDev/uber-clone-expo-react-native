@@ -5,6 +5,7 @@ import { useLocationStore } from "@/store";
 import { RideLayout } from "@/components/ride-layout";
 import { CustomButton } from "@/components/custom-button";
 import { GoogleTextInput } from "@/components/google-text-input";
+
 export default function FindRide() {
     const {
         userAddress,

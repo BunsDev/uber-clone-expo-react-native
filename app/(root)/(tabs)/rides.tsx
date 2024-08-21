@@ -27,7 +27,7 @@ export default function Rides() {
                     paddingBottom: 100,
                 }}
                 ListEmptyComponent={() => (
-                    <View className="flex flex-col items-center justify-center">
+                    <View className="flex flex-col items-center justify-center w-full">
                         {!loading ? (
                             <>
                                 <Image

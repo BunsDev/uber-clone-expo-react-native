@@ -7,7 +7,7 @@ import { RideLayout } from "@/components/ride-layout";
 import { useDriverStore, useLocationStore } from "@/store";
 import { StripeProvider } from "@stripe/stripe-react-native";
 
-export const BookRide = () => {
+export default function BookRide() {
     const { user } = useUser();
     const { userAddress, destinationAddress } = useLocationStore();
     const { drivers, selectedDriver } = useDriverStore();
