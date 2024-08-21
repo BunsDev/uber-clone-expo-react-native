@@ -3,9 +3,10 @@ import { useFetch } from "@/lib/fetch";
 import { calculateDriverTimes, calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { useDriverStore, useLocationStore } from "@/store";
 import { Driver, MarkerData } from "@/types/type";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
 
 export const Map = () => {
     const { data: drivers, loading, error } = useFetch<Driver[]>(`/(api)/driver`);
@@ -29,10 +30,10 @@ export const Map = () => {
 
             setMarkers(newMarkers);
         }
-    }, [drivers]);
+    }, [drivers, userLatitude, userLongitude]);
 
     useEffect(() => {
-        if (markers.length > 0 && destinationLatitude && destinationLongitude) { 
+        if (markers.length > 0 && destinationLatitude && destinationLongitude) {
             calculateDriverTimes({
                 markers,
                 userLongitude,
@@ -93,6 +94,32 @@ export const Map = () => {
 
                 </Marker>
             ))}
+            {destinationLatitude && destinationLongitude && (
+                <>
+                    <Marker
+                        key="destination"
+                        coordinate={{
+                            latitude: destinationLatitude,
+                            longitude: destinationLongitude
+                        }}
+                        title="Destination"
+                        image={icons.pin}
+                    />
+                    < MapViewDirections
+                        origin={{
+                            latitude: userLatitude,
+                            longitude: userLongitude
+                        }}
+                        destination={{
+                            latitude: destinationLatitude,
+                            longitude: destinationLongitude
+                        }}
+                        apiKey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
+                        strokeWidth={2}
+                        strokeColor="black"
+                    />
+                </>
+            )}
         </MapView>
     )
 }
