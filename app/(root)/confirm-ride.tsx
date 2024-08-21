@@ -7,20 +7,18 @@ import { router } from "expo-router";
 import { FlatList, View } from "react-native";
 
 export default function ConfirmRide() {
-    const {
-        drivers,
-        selectedDriver,
-        setSelectedDriver,
-    } = useDriverStore()
+    const { drivers, selectedDriver, setSelectedDriver } = useDriverStore();
+
     return (
-        <RideLayout title="Choose Driver" snapPoints={["65%", "85%"]}>
-            <FlatList 
+        <RideLayout title={"Choose a Rider"} snapPoints={["65%", "85%"]}>
+            <FlatList
                 data={drivers}
-                renderItem={(item) => (
-                    <DriverCard 
-                        item={item} 
-                        selected={selectedDriver}
-                        setSelected={() => setSelectedDriver(item.id)}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                    <DriverCard
+                        item={item}
+                        selected={selectedDriver!}
+                        setSelected={() => setSelectedDriver(item.id!)}
                     />
                 )}
                 ListFooterComponent={() => (
