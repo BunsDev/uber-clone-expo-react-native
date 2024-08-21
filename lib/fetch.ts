@@ -4,11 +4,17 @@ export const fetchAPI = async (url: string, options?: RequestInit) => {
     try {
         const response = await fetch(url, options);
         if (!response.ok) {
-            new Error(`HTTP error! status: ${response.status}`);
+            // Read the response as text first
+            const text = await response.text();
+            console.error('Server response:', text);
+            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
         }
         return await response.json();
     } catch (error) {
         console.error("Fetch error:", error);
+        if (error instanceof SyntaxError) {
+            console.error("JSON Parse error. Response might not be valid JSON.");
+        }
         throw error;
     }
 };

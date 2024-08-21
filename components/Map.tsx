@@ -114,7 +114,7 @@ export const Map = () => {
                             latitude: destinationLatitude,
                             longitude: destinationLongitude
                         }}
-                        apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
+                        apikey={process.env.EXPO_PUBLIC_DIRECTIONS_API_KEY!}
                         strokeWidth={2}
                         strokeColor="black"
                     />

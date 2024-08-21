@@ -17,7 +17,7 @@ export default function Home() {
   const [_, setHasPermissions] = useState(false);
   const { user } = useUser();
   const { signOut } = useAuth();
-  const { data: recentRides, loading } = useFetch<Ride[]>(`/(api)/rides/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(`/(api)/ride/${user?.id}`);
 
   useEffect(() => {
     (async () => {
@@ -62,7 +62,7 @@ export default function Home() {
   }
 
   return (
-    <SafeAreaView className="bg-general-500">
+    <SafeAreaView className="bg-general-500 w-full">
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
@@ -72,7 +72,7 @@ export default function Home() {
           paddingBottom: 100
         }}
         ListEmptyComponent={() => (
-          <View className="flex flex-col items-center justify-center w-full">
+          <View className="flex flex-col items-center justify-center w-full h-full">
             {!loading ? (
               <>
                 <Image
@@ -109,7 +109,7 @@ export default function Home() {
             <GoogleTextInput
               icon={icons.search}
               handlePress={handleDestinationPress}
-              containerStyle="bg-neutral-50 shadow-md shadow-neutral-300"
+              containerStyle="bg-white"
             />
             <>
               <Text className="text-lg font-JakartaBold mt-5 mb-3">

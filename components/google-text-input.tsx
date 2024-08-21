@@ -3,8 +3,6 @@ import { View, Image } from "react-native"
 import { GoogleInputProps } from "@/types/type"
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
-
 export const GoogleTextInput = ({
     icon,
     initialLocation,
@@ -25,7 +23,7 @@ export const GoogleTextInput = ({
                         borderRadius: 20,
                         marginHorizontal: 20,
                         position: "relative",
-                        shadowColor: "#d4d4d4"
+                        shadowColor: "white"
                     },
                     textInput: {
                         backgroundColor: textInputBackgroundColor || "white",
@@ -33,7 +31,7 @@ export const GoogleTextInput = ({
                         fontWeight: "600",
                         marginTop: 5,
                         width: "100%",
-                        borderRadius: 200,
+                        borderRadius: 20,
                     },
                     listView: {
                         backgroundColor: textInputBackgroundColor || "white",
@@ -41,7 +39,7 @@ export const GoogleTextInput = ({
                         top: 0,
                         width: "100%",
                         borderRadius: 10,
-                        shadowColor: "#d4d4d4",
+                        shadowColor: "white",
                         zIndex: 99
                     }
                 }}
@@ -53,7 +51,7 @@ export const GoogleTextInput = ({
                     })
                 }}
                 query={{
-                    key: GOOGLE_PLACES_API_KEY,
+                    key: process.env.EXPO_PUBLIC_PLACES_API_KEY,
                     language: "en",
                 }}
                 renderLeftButton={() => (

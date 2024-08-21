@@ -47,7 +47,7 @@ export default function FindRide() {
             <CustomButton
                 title="Find Rides"
                 className="mt-5"
-                onPress={() => router.push("/(root)/find-ride")}
+                onPress={() => router.push("/(root)/confirm-ride")}
             />
         </RideLayout>
     )
