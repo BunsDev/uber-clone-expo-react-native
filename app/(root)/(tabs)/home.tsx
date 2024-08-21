@@ -1,23 +1,23 @@
-import { GoogleTextInput } from '@/components/google-text-input'
-import { Map } from '@/components/map'
-import { RideCard } from '@/components/ride-card'
-import { icons, images, rides } from '@/constants'
-import { useLocationStore } from '@/store'
-import { useAuth, useUser } from '@clerk/clerk-expo'
-import { useEffect, useState } from 'react'
-import { FlatList, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Ride } from '@/types/type';
+import { router } from 'expo-router';
+import { Map } from '@/components/map';
+import { useFetch } from '@/lib/fetch';
 import * as Location from "expo-location";
-import { router } from 'expo-router'
-import { useFetch } from '@/lib/fetch'
-
+import { useLocationStore } from '@/store';
+import { icons, images } from '@/constants';
+import { useEffect, useState } from 'react';
+import { RideCard } from '@/components/ride-card';
+import { useAuth, useUser } from '@clerk/clerk-expo';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { GoogleTextInput } from '@/components/google-text-input';
+import { FlatList, Text, View, Image, ActivityIndicator, Pressable } from 'react-native'
 
 export default function Home() {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
-  const [hasPermissions, setHasPermissions] = useState(false);
+  const [_, setHasPermissions] = useState(false);
   const { user } = useUser();
   const { signOut } = useAuth();
-  const { data: recentRides, loading } = useFetch(`/(api)/rides/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(`/(api)/rides/${user?.id}`);
 
   useEffect(() => {
     (async () => {
@@ -38,7 +38,7 @@ export default function Home() {
       setUserLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        address: `${address[0].name}, ${address[0].region}`, 
+        address: `${address[0].name}, ${address[0].region}`,
       })
     })();
   }, [])
@@ -49,12 +49,12 @@ export default function Home() {
   }
 
   const handleDestinationPress = (
-    location : {
+    location: {
       address: string,
-      latitude: number, 
-      longitude: number, 
+      latitude: number,
+      longitude: number,
     }
-    
+
   ) => {
     setDestinationLocation(location);
 
@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
-        data={rides.slice(0, 5)}
+        data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
         className="px-5"
         keyboardShouldPersistTaps="handled"

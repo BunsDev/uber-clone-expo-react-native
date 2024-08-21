@@ -1,9 +1,8 @@
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-
 import { icons } from "@/constants";
 import { formatTime } from "@/lib/utils";
 import { DriverCardProps } from "@/types/type";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export const DriverCard = ({ 
     item, 

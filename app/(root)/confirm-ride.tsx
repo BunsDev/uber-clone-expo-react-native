@@ -1,10 +1,9 @@
-import { CustomButton } from "@/components/custom-button";
+import { router } from "expo-router";
+import { useDriverStore } from "@/store";
+import { FlatList, View } from "react-native";
 import { DriverCard } from "@/components/driver-card";
 import { RideLayout } from "@/components/ride-layout";
-import { drivers } from "@/constants";
-import { useDriverStore } from "@/store";
-import { router } from "expo-router";
-import { FlatList, View } from "react-native";
+import { CustomButton } from "@/components/custom-button";
 
 export default function ConfirmRide() {
     const { drivers, selectedDriver, setSelectedDriver } = useDriverStore();

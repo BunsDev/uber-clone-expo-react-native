@@ -1,12 +1,12 @@
 import { icons } from "@/constants";
 import { useFetch } from "@/lib/fetch";
-import { calculateDriverTimes, calculateRegion, generateMarkersFromData } from "@/lib/map";
-import { useDriverStore, useLocationStore } from "@/store";
 import { Driver, MarkerData } from "@/types/type";
 import React, { useEffect, useState } from "react";
+import { useDriverStore, useLocationStore } from "@/store";
 import { ActivityIndicator, Text, View } from "react-native";
-import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import { calculateDriverTimes, calculateRegion, generateMarkersFromData } from "@/lib/map";
 
 export const Map = () => {
     const { data: drivers, loading, error } = useFetch<Driver[]>(`/(api)/driver`);

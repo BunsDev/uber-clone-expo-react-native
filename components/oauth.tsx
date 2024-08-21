@@ -1,9 +1,9 @@
-import { Text, View, Image, Alert } from "react-native"
-import { CustomButton } from "./custom-button"
-import { icons } from "@/constants"
+import { icons } from "@/constants";
+import { router } from "expo-router";
 import { googleOAuth } from "@/lib/auth";
 import { useOAuth } from "@clerk/clerk-expo";
-import { router } from "expo-router";
+import { CustomButton } from "./custom-button";
+import { Text, View, Image, Alert } from "react-native";
 
 export const OAuth = () => {
     const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });

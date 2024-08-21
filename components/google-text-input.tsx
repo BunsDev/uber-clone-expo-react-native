@@ -1,7 +1,6 @@
-
 import { icons } from "@/constants";
-import { GoogleInputProps } from "@/types/type"
 import { View, Image } from "react-native"
+import { GoogleInputProps } from "@/types/type"
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
@@ -63,7 +62,7 @@ export const GoogleTextInput = ({
                             source={icon ? icon : icons.search}
                             alt="Search Icon"
                             className="w-6 h-6"
-                            resizeMode="contain" 
+                            resizeMode="contain"
                         />
 
                     </View>

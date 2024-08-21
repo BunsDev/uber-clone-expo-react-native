@@ -1,13 +1,22 @@
-import { CustomButton } from "@/components/custom-button";
-import { InputField } from "@/components/input-field";
-import { OAuth } from "@/components/oauth";
-import { icons, images } from "@/constants";
-import { fetchAPI } from "@/lib/fetch";
-import { useSignUp } from "@clerk/clerk-expo";
-import { Link, router } from "expo-router";
 import { useState } from "react";
-import { View, Text, ScrollView, Image, Alert } from "react-native";
+import { fetchAPI } from "@/lib/fetch";
+import { Link, router } from "expo-router";
+import { icons, images } from "@/constants";
+import { useSignUp } from "@clerk/clerk-expo";
 import { ReactNativeModal } from "react-native-modal";
+
+import {
+    View,
+    Text,
+    Image,
+    Alert,
+    ScrollView,
+} from "react-native";
+
+
+import { OAuth } from "@/components/oauth";
+import { InputField } from "@/components/input-field";
+import { CustomButton } from "@/components/custom-button";
 
 
 export default function SignUp() {

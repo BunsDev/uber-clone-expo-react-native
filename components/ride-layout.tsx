@@ -1,10 +1,10 @@
+import { Map } from "./map";
+import { useRef } from "react";
 import { icons } from "@/constants";
 import { router } from "expo-router";
-import { Image, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { Image, Pressable, Text, View } from "react-native";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Map } from "./map";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"
-import { useRef } from "react";
 
 export const RideLayout = ({
     children,
