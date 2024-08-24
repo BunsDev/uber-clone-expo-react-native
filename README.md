@@ -1,51 +1,96 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<h1 align="center">
+  <br>
+  <img src="https://github.com/user-attachments/assets/e0fda9c2-1f22-40ae-a815-36f2535f2eae" alt="Ryde" width="200">
+  <br>
+  Uber Clone - React Native (Expo)
+  <br>
+</h1>
 
-## Get started
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+<h4 align="center">Built with React Native (Expo) for handling the user interface, Google Maps for rendering maps with directions, stripe for handling payments, serverless Postgres for managing databases, and styled with TailwindCSS, Uber Clone is a perfect mobile app.</h4>
 
-2. Start the app
+## 📍 Home Screen with Live Location & Google Map 📍
 
-   ```bash
-    npx expo start
-   ```
+<img width="1469" alt="Screenshot 2024-07-25 at 5 41 36 PM" src="https://github.com/user-attachments/assets/415083fc-b081-45e0-bc82-ee552853b741">
 
-In the output, you'll find options to open the app in a
+## 👀 Find Rides 👀
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+<img width="1469" alt="Screenshot 2024-07-25 at 5 41 53 PM" src="https://github.com/user-attachments/assets/088f9b9e-54a4-41ea-b3a7-b87184bdceb6">
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 👆🏼 Choose A Rider 👆🏼
 
-## Get a fresh project
+<img width="1469" alt="Screenshot 2024-07-25 at 5 41 53 PM" src="https://github.com/user-attachments/assets/9e74062e-5f33-4725-b4d5-3c22d4cf8289">
 
-When you're ready, run:
+## 🚕 Select Rides From Map 🚕
+
+<img width="1469" alt="Screenshot 2024-07-25 at 5 41 53 PM" src="https://github.com/user-attachments/assets/07348f4d-2884-4290-a6f8-b1b77dd581ac">
+
+## 💳 Pay For Rides Using Stripe 🖋💳
+
+<img width="1469" alt="Screenshot 2024-07-25 at 5 42 16 PM" src="https://github.com/user-attachments/assets/c90b5924-d90e-43e3-bc5e-4989ad30cd8a">
+
+
+## ✨ Main Key Features of Ryde ✨
+| <div style="width:285px">**Feature**</div> | **Description** |
+|---|---|
+| **1. Home Screen with Live Location & Google Map** | Real-time location tracking with markers on a map. |
+| **2. Rides** | View a list of recent rides at a glance. Search for rides by entering 'From' and 'To' locations. Choose available cars near your location from the map. View complete ride details, including time and fare price.|
+| **3. Google Places Autocomplete** | earch any place on Earth with autocomplete suggestions. |
+| **4. Pay for Ride Using Stripe** | Make payments using multiple methods like cards and others. |
+| **5. Clean, Modern UI using TailwindCSS** | A visually appealing and user-friendly interface that provides a seamless experience across devices, built with cutting-edge technologies for optimal performance and responsiveness. |
+
+
+## 📚 Tech Stack 📚
+
+| <div style="width:140px">**Category**</div> | <div style="width:100px">**Choice**</div> | **Descriptions** |
+|---|---|---|
+| **Frontend** | [React Native](https://github.com/facebook/react) | Declarative and component-based for building interactive UIs. |
+| **Web Framework** | [Expo](https://github.com/vercel/next.js) | Server-side rendering and static site generation for SEO and performance. |
+| **Language** | [TypeScript](https://github.com/microsoft/TypeScript) | Static typing for improved code maintainability and fewer errors. |
+| **CSS Framework** | [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) | Utility-first approach for rapid UI development and customization. |
+| **NeonTech** | [NeonTech](https://github.com/neondatabase/neon) | Real-time data management, serverless functions, and efficient queries. |
+| **Authentication** | [Clerk](https://github.com/clerk/clerk-docs) | Seamless user authentication and authorization. |
+| **Google Maps** | [Google Maps](https://developers.google.com/maps) | Comprehensive mapping and location services for web and mobile applications. |
+| **Stripe** | [Stripe](https://stripe.com/docs) | Robust payment processing and financial services for online businesses. |
+| **State Management** | [Zustand](https://github.com/pmndrs/zustand) | Lightweight and performant for managing application state. |
+
+
+
+## 🔥 Getting started 🔥
+
+To clone and run this application, you'll need [Git](https://github.com/achris-alonzo30/uber-clone.git) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-npm run reset-project
+# Clone this repository
+$ git clone https://github.com/achris-alonzo30/uber-clone.git
+
+# Go into the repository
+$ cd uber clone
+
+# Install dependencies
+$ npm install or bun install
+
+# Run the app
+$ npx expo start -c
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## ‼️ **Prerequisites** ‼️
 
-## Learn more
+Copy this and paste it in your .env or .env.local.
+```
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=
 
-To learn more about developing your project with Expo, look at the following resources:
+EXPO_PUBLIC_PLACES_API_KEY=
+EXPO_PUBLIC_DIRECTIONS_API_KEY=
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+DATABASE_URL=
 
-## Join the community
+EXPO_PUBLIC_SERVER_URL=https://uber.dev/
 
-Join our community of developers creating universal apps.
+EXPO_PUBLIC_GEOAPIFY_API_KEY=
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# uber-clone
+EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+```
